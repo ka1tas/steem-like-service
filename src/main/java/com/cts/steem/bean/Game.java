@@ -1,15 +1,43 @@
 package com.cts.steem.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="game")
 public class Game {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ga_id")
 	private int id;
+	
+	@Column(name="ga_name")
 	private String name;
+	
+	@Column(name="ga_developer")
 	private String developer;
+	
+	@Column(name="ga_description")
 	private String description;
+	
+	@Column(name="ga_about")
 	private String about;
+	
+	@Column(name="ga_price")
 	private int price;
+	
+	@Column(name="ga_rating")
 	private int rating;
+	
+	@Column(name="ga_genre")
 	private String genre;
+	
+	@Column(name="ga_year")
 	private int year;
 	
 	
