@@ -1,10 +1,6 @@
 package com.cts.steem.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="game")
 public class Game {
 	private int id;
 	private String name;
