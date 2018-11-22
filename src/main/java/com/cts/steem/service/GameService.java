@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.steem.bean.Game;
+import com.cts.steem.bean.User;
 import com.cts.steem.repository.GameRepository;
 
 @Service
@@ -24,6 +25,11 @@ public class GameService {
 
 		return (List<Game>) gameRepository.findAll();
 
+	}
+
+	@Transactional
+	public Game getGame(int gameId) {
+		return gameRepository.findById(gameId);
 	}
 
 

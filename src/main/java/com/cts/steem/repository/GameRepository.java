@@ -8,6 +8,6 @@ import com.cts.steem.bean.Game;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
-
+	Game findById( int gameId);
 
 }

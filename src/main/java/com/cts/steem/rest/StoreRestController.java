@@ -43,10 +43,8 @@ public class StoreRestController {
 	@GetMapping("/show")
 	public List <Game> showGame (){
 		List<Game> games = gameService.getGames();
-		
 		System.out.println(games);
-		return games;
-		
+		return games;	
 	
 	}
 
@@ -58,20 +56,23 @@ public class StoreRestController {
 
 		ShowStoreView showstore = new ShowStoreView();
 		
-	
 		User user1= userService.getUser(userId);
 		List<Game> games = gameService.getGames();
-		
 		
 		showstore.setUser(user1);
 		showstore.setGame(games);
 			
-
-		
-		
 		return showstore;
-		
+	}
+
 	
+	
+	@GetMapping("/showgame")
+	public Game showGame (int userId){
+
+		Game game = gameService.getGame(userId);
+	
+		return game;
 	}
 
 	
