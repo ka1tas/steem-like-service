@@ -1,10 +1,27 @@
 package com.cts.steem.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user")
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "us_id")
 	private int id;
+	
+	@Column(name="us_firstname")
 	private String firstName;
+	
+	@Column(name="us_lastname")
 	private String lastName;
+<<<<<<< HEAD
 	private String gender; 
 	private int age;
 	private String country;
@@ -12,13 +29,44 @@ public class User {
 	private int mobileno;
 	private String description;
 	private int steempoints; 
+=======
+	
+	@Column(name="us_gender")
+	private String gender; 
+	
+	@Column(name="us_age")
+	private int age;
+	
+	@Column(name="us_country")
+	private String country;
+	
+	@Column(name="us_email")
+	private String email;
+	
+	@Column(name="us_mobilenumber")
+	private String mobileno;
+	
+	@Column(name="us_description")
+	private String description;
+	
+	@Column(name="us_steempoints")
+	private int steempoints; 
+	
+	@Column(name="us_username")
+>>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
 	private String userName;
+	
+	@Column(name="us_password")
 	private String password;
 	
 	
 	
 	public User(int id, String firstName, String lastName, String gender, int age, String country, String email,
+<<<<<<< HEAD
 			int mobileno, String description, int steempoints, String userName, String password) {
+=======
+			String mobileno, String description, int steempoints, String userName, String password) {
+>>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -127,13 +175,21 @@ public class User {
 
 
 
+<<<<<<< HEAD
 	public int getMobileno() {
+=======
+	public String getMobileno() {
+>>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
 		return mobileno;
 	}
 
 
 
+<<<<<<< HEAD
 	public void setMobileno(int mobileno) {
+=======
+	public void setMobileno(String mobileno) {
+>>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
 		this.mobileno = mobileno;
 	}
 

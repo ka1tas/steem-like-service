@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.steem.SteemException;
+
 import com.cts.steem.bean.Game;
 import com.cts.steem.repository.GameRepository;
 
@@ -14,12 +15,12 @@ import com.cts.steem.repository.GameRepository;
 public class GameService {
 	
 	private GameRepository gameRepository;
-	
-	
+
 	@Autowired
 	public void setGameRepository(GameRepository gameRepository) {
 		this.gameRepository = gameRepository;
 	}
+
 	
 	@Transactional
 	public List<Game> getGame() throws SteemException {
@@ -33,4 +34,15 @@ public class GameService {
 	}
 	
 	
+
+
+	@Transactional
+	public List<Game> getGames() {
+
+		return (List<Game>) gameRepository.findAll();
+
+	}
+
+
+
 }

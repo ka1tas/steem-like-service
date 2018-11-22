@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="game")
-
 @NamedQueries({
 	@NamedQuery(
 			name="Game.fetchAllGameDetails",
@@ -150,5 +149,5 @@ public class Game {
 				+ "]";
 	}
 	
-	
+
 }
