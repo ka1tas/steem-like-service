@@ -13,12 +13,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
-@NamedQueries({ @NamedQuery(name = "User.fetchAllUserDetails", query = "select distinct u from User u") })
+@NamedQueries({ @NamedQuery(name = "User.fetchAllUserDetails", query = "select distinct u from User u"), 
+
+@NamedQuery(name = "User.fetchUserById", query =" select DISTINCT u from User u" +  " where u.id=:userId")
+
+
+})
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	@Column(name = "us_id")
+	@Column(name = "us_id", unique=true)
 	private int id;
 
 	@Column(name = "us_firstname")

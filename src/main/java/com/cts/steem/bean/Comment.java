@@ -17,39 +17,39 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "comment")
-@NamedQueries({ @NamedQuery(name = "Comment.fetchAllCommentDetails",
-							query = "from Comment")
-/*@NamedQuery(name = "Comment.fetchCommentDetails", query = " select c from Comment c"
-			+ " left join fetch c.user " + " join fetch c.post" + " where user.id= :userId")	*/
-							
-			  })
-   
+@NamedQueries({ @NamedQuery(name = "Comment.fetchAllCommentDetails", query = "from Comment"),
+	
+ @NamedQuery(name = "Comment.fetchCommentDetailById", query =
+ 
+		 " select DISTINCT c from Comment c" + " left join fetch c.user " +
+		  " left join fetch c.post " + " where c.id=:postId")
+		 
 
+})
 
 public class Comment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	@Column(name = "co_id")
 	private int id;
-	
+
 	@Column(name = "co_content")
 	private String content;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "co_us_id")
 	private User user;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "co_po_id")
 	@JsonIgnore
 	private Post post;
-	
-	
+
 	public Comment() {
 		super();
-		
+
 	}
 
 	public int getId() {
@@ -88,8 +88,5 @@ public class Comment {
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", user=" + user + ", post=" + post + "]";
 	}
-	
-	
-	
 
 }

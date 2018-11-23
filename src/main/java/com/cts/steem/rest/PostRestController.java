@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,13 @@ public class PostRestController {
 	@GetMapping("/postlist")
 	public List<Post> getAllPosts() throws SteemException {
 		List<Post> allPosts = postService.getPostDetails();
+		LOGGER.debug(allPosts.toString());
+		return allPosts;
+	}
+	
+	@GetMapping("/show/{postId}")
+	public Post getPostById(@PathVariable int postId) throws SteemException {
+		Post allPosts = postService.getPostDetailById(postId);
 		LOGGER.debug(allPosts.toString());
 		return allPosts;
 	}

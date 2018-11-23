@@ -12,6 +12,6 @@ import com.cts.steem.bean.Post;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 	List<Post> fetchAllPostDetails();
 
-	/* Post fetchEmployeeDetails(@Param("userId") int userId); */
+	 Post fetchPostDetailById(@Param("postId") int postId);
 
 }

@@ -27,5 +27,9 @@ public class PostService {
 	public List<Post> getPostDetails() {
 		return postRepository.fetchAllPostDetails();
 	}
+	@Transactional
+	public Post getPostDetailById(int postId) {
+		return postRepository.fetchPostDetailById(postId);
+	}
 
 }

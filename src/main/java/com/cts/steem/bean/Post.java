@@ -20,18 +20,15 @@ import javax.persistence.Table;
 @NamedQueries({ 
 	@NamedQuery(
 		name = "Post.fetchAllPostDetails", 
-		query = "select distinct p from Post p left join fetch p.user left join fetch p.commentList"
-	) 
-})
-/*
- * @NamedQuery(name = "Post.fetchPostDetails", query =
- * " select content from Post" +
- * " group_concat(distinct comment.co_content separator ',') comment " +
- * " from ((comment inner join user on us_id=co_us_id)" +
- * "   inner join post on po_id=co_po_id)" + " group by us_id " +
- * " HAVING user.id= :userId")
- */
+		query = "select distinct p from Post p left join fetch p.user left join p.commentList"
+	) ,
 
+
+@NamedQuery(
+		name = "Post.fetchPostDetailById", 
+		query =	"select distinct p from Post p left join fetch p.user left join fetch p.commentList where p.id= :postId")
+ 
+})
 public class Post {
 
 	@Id
@@ -42,6 +39,9 @@ public class Post {
 
 	@Column(name = "po_content")
 	private String content;
+	
+	@Column(name = "po_title")
+	private String title;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "po_us_id")
@@ -83,6 +83,19 @@ public class Post {
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
+	
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
