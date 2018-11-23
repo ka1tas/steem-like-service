@@ -21,7 +21,7 @@ public class UserService {
 	@Transactional
 	public User getUser(String userName) {
 
-		return (User) userRepository.findByUserName(userName);
+		return userRepository.findByUserName(userName);
 
 	}
 	

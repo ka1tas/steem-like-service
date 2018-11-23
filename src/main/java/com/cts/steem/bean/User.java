@@ -21,16 +21,7 @@ public class User {
 	
 	@Column(name="us_lastname")
 	private String lastName;
-<<<<<<< HEAD
-	private String gender; 
-	private int age;
-	private String country;
-	private String email;
-	private int mobileno;
-	private String description;
-	private int steempoints; 
-=======
-	
+
 	@Column(name="us_gender")
 	private String gender; 
 	
@@ -53,40 +44,28 @@ public class User {
 	private int steempoints; 
 	
 	@Column(name="us_username")
->>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
+
 	private String userName;
 	
 	@Column(name="us_password")
 	private String password;
 	
-	
-	
-	public User(int id, String firstName, String lastName, String gender, int age, String country, String email,
-<<<<<<< HEAD
-			int mobileno, String description, int steempoints, String userName, String password) {
-=======
-			String mobileno, String description, int steempoints, String userName, String password) {
->>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.age = age;
-		this.country = country;
-		this.email = email;
-		this.mobileno = mobileno;
-		this.description = description;
-		this.steempoints = steempoints;
-		this.userName = userName;
-		this.password = password;
-	}
-
-
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public String getMobileno() {
+		return mobileno;
+	}
+
+
+
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
 	}
 
 
@@ -174,24 +153,6 @@ public class User {
 	}
 
 
-
-<<<<<<< HEAD
-	public int getMobileno() {
-=======
-	public String getMobileno() {
->>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
-		return mobileno;
-	}
-
-
-
-<<<<<<< HEAD
-	public void setMobileno(int mobileno) {
-=======
-	public void setMobileno(String mobileno) {
->>>>>>> b360c82e2a70f0977afaca28e3522d768846300b
-		this.mobileno = mobileno;
-	}
 
 
 

@@ -23,10 +23,10 @@ public class GameRestController {
 		this.gameService = gameService;
 	}
 
-	@GetMapping("/list")
+	/*@GetMapping("/list")
 	public List<Game> getAllGames() throws SteemException{
 		return gameService.getGame();
-	}
+	}*/
 	
 	@GetMapping("/show/{gameId}")
 	public Game showGame(@PathVariable int gameId) throws SteemException	{
