@@ -1,16 +1,51 @@
 package com.cts.steem.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user")
+@NamedQueries({
+	@NamedQuery(
+        name="User.fetchUserGames",
+        query="select distinct u from User u " + 
+        		"left join fetch u.gameList " + 
+        		"where u.id = :userId"
+ 	),
+	@NamedQuery(
+	        name="User.fetchUserFriends",
+	        query="select distinct u from User u " + 
+	        		"left join fetch u.friendList " + 
+	        		"where u.id = :userId"
+	 	)
+	/*@NamedQuery(
+	        name="User.fetchUserFriends",
+	        query="select distinct u from User u " + 
+	        		"left join fetch u.game " + 
+	        		"where u.id = :userId"
+ 	)*/
+})
 public class User {
-	
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "us_id")
@@ -49,26 +84,37 @@ public class User {
 	@Column(name="us_password")
 	private String password;
 	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(
+		name="gameusers",
+		joinColumns={
+			@JoinColumn(name="gu_us_id")
+		},
+		inverseJoinColumns={
+			@JoinColumn(name="gu_ga_id")
+		}
+	)
+
+	private List<Game> gameList;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(
+		name="friend",
+		joinColumns={
+			@JoinColumn(name="fr_us_id")
+		},
+		inverseJoinColumns={
+			@JoinColumn(name="fr_fr_id")
+		}
+	)
+	@JsonIgnore
+	private List<User> friendList;
+	
+	@Transient
+	private List<String> friends;
 	
 	
-	public User(int id, String firstName, String lastName, String gender, int age, String country, String email,
-			String mobileno, String description, int steempoints, String userName, String password) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.age = age;
-		this.country = country;
-		this.email = email;
-		this.mobileno = mobileno;
-		this.description = description;
-		this.steempoints = steempoints;
-		this.userName = userName;
-		this.password = password;
-	}
-
-
+	
 
 	public User() {
 		super();
@@ -97,6 +143,49 @@ public class User {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+
+
+	
+
+
+	public List<Game> getGameList() {
+		return gameList;
+	}
+
+
+
+	public void setGameList(List<Game> gameList) {
+		this.gameList = gameList;
+	}
+
+
+	public List<User> getFriendList() {
+		return friendList;
+	}
+
+
+	public void setFriendList(List<User> friendList) {
+		this.friendList = friendList;
+	}
+
+
+
+	public List<String> getFriends() {
+
+		List<String> friends = new ArrayList<String>();
+		for (User friend : friendList) {
+			friends.add(friend.getUserName());
+		}
+		return friends;
+		
+	}
+
+
+
+	public void setFriends(List<String> friends) {
+		this.friends = friends;
 	}
 
 

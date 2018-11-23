@@ -30,5 +30,13 @@ public class UserService {
 		return userRepository.findById(userId);
 	}
 
+	@Transactional
+	public User getUserGamesAndFriends(int userId) {
+		User user = new User();
+		user=userRepository.fetchUserGames(userId);
+		user=userRepository.fetchUserFriends(userId);
+		return user;
+	}
 
+	
 }

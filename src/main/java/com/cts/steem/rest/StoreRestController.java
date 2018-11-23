@@ -41,7 +41,7 @@ public class StoreRestController {
 	
 	
 	@GetMapping("/show")
-	public List <Game> showGame (){
+	public List<Game> showGame (){
 		List<Game> games = gameService.getGames();
 		System.out.println(games);
 		return games;	
@@ -68,9 +68,9 @@ public class StoreRestController {
 	
 	
 	@GetMapping("/showgame")
-	public Game showGame (int userId){
+	public Game showGame (int gameId){
 
-		Game game = gameService.getGame(userId);
+		Game game = gameService.getGame(gameId);
 	
 		return game;
 	}

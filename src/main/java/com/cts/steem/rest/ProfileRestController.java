@@ -25,9 +25,12 @@ public class ProfileRestController {
 	@GetMapping("/showProfile")
 	public User showProfile(int userId) {
 
-		User user1 = userService.getUser(userId);
+		User user1 = userService.getUserGamesAndFriends(userId);
+		
 		return user1;
 
 	}
+	
+	
 
 }
