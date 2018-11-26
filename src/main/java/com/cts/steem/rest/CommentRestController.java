@@ -71,7 +71,7 @@ public class CommentRestController {
 		User user = userService.getUser(userid);
 		System.out.println(user);
 		comment.setUser(user);
-		System.out.println(comment);
+		
 		int postId=comment.getPostid();
 	
 		System.out.println("post id:" +postId);
