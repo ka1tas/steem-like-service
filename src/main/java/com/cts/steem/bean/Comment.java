@@ -1,5 +1,7 @@
 package com.cts.steem.bean;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,10 +50,15 @@ public class Comment {
 	@JsonIgnore
 	private Post post;
 
+	
+	@Transient
+	private int postid ;
+	
 	public Comment() {
 		super();
 
 	}
+	
 
 	public int getId() {
 		return id;
@@ -84,9 +92,27 @@ public class Comment {
 		this.post = post;
 	}
 
+	
+	public int getPostid() {
+		
+		return postid;
+	}
+
+
+
+	public void setPostid(int postid) {
+		this.postid = postid;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", user=" + user + ", post=" + post + "]";
+		return "Comment [id=" + id + ", content=" + content + ", user=" + user + ", post=" + post + ", postid=" + postid
+				+ "]";
 	}
+
+
+	
+	 
 
 }

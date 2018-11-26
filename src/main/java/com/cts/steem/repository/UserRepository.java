@@ -13,4 +13,7 @@ import com.cts.steem.bean.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> fetchAllUserDetails();
 	User fetchUserById (@Param("userId") int userId);
+	
+	User findById( int userId);
+	
 }

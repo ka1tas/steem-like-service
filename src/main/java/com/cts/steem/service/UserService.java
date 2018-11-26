@@ -29,4 +29,9 @@ public class UserService {
 	public User getUserById(int userId) {
 		return userRepository.fetchUserById(userId);
 	}
+	
+	@Transactional
+	public User getUser(int userId) {
+		return userRepository.findById(userId);
+	}
 }

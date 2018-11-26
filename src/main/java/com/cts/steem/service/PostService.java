@@ -32,4 +32,9 @@ public class PostService {
 		return postRepository.fetchPostDetailById(postId);
 	}
 
+	@Transactional
+	public Post getPostById(int postId) {
+		return postRepository.findById(postId);
+	}
+	
 }

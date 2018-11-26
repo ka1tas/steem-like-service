@@ -18,9 +18,8 @@ import com.cts.steem.SteemException;
 import com.cts.steem.bean.Comment;
 import com.cts.steem.bean.User;
 import com.cts.steem.repository.CommentRepository;
-import com.cts.steem.repository.PostRepository;
-import com.cts.steem.repository.UserRepository;
 import com.cts.steem.service.CommentService;
+import com.cts.steem.service.PostService;
 import com.cts.steem.service.UserService;
 
 @RestController
@@ -33,8 +32,8 @@ public class CommentRestController {
 	@SuppressWarnings("unused")
 	private CommentRepository commentRepository;
 	@SuppressWarnings("unused")
-	private UserRepository userRepository;
-	private PostRepository postRepository;
+	private UserService userService;
+	private PostService postService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommentRestController.class);
 
@@ -43,6 +42,16 @@ public class CommentRestController {
 		this.commentService = commentService;
 	}
 
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
+	@Autowired
+	public void setPostService(PostService postService) {
+		this.postService = postService;
+	}
+	
 	@GetMapping("/commentlist")
 	public List<Comment> getAllComments() throws SteemException {
 		
@@ -58,11 +67,15 @@ public class CommentRestController {
 	public ResponseEntity<Comment> insertComment(@RequestBody Comment comment) {
 		System.out.println(comment);
 		int userid=comment.getUser().getId();
-		System.out.println(userid);
-		User user = userRepository.fetchUserById(userid);
+		System.out.println("bvtyfiguv0" +userid);	
+		User user = userService.getUser(userid);
+		System.out.println(user);
 		comment.setUser(user);
-		int postid=comment.getPost().getId();
-		comment.setPost(postRepository.fetchPostDetailById(postid));
+		System.out.println(comment);
+		int postId=comment.getPostid();
+	
+		System.out.println("post id:" +postId);
+		comment.setPost(postService.getPostById(postId));
 		LOGGER.info("starting" );
 		commentService.saveComment(comment);
 		LOGGER.debug("comment details are" + comment);
