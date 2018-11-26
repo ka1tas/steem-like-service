@@ -341,17 +341,6 @@ public class User {
 
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", age=" + age + ", country=" + country + ", email=" + email + ", mobileno=" + mobileno
-				+ ", description=" + description + ", steempoints=" + steempoints + ", userName=" + userName
-				+ ", password=" + password + ", gameList=" + gameList + ", friendList=" + friendList + ", friends="
-				+ friends + "]";
-	}
-
-
-
 	
 
 

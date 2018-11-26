@@ -5,14 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.cts.steem.bean.Post;
 import com.cts.steem.repository.PostRepository;
-import com.cts.steem.repository.UserRepository;
+
+import com.cts.steem.rest.PostRestController;
 
 @Service
 public class PostService {
 
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(PostRestController.class);
 	private PostRepository postRepository;
 	@SuppressWarnings("unused")
 	
@@ -25,7 +29,7 @@ public class PostService {
 	
 	@Transactional
 	public List<Post> getPostDetails() {
-		return postRepository.fetchAllPostDetails();
+		return postRepository.findAll();
 	}
 	@Transactional
 	public Post getPostDetailById(int postId) {
@@ -36,5 +40,16 @@ public class PostService {
 	public Post getPostById(int postId) {
 		return postRepository.findById(postId);
 	}
+	
+	
+	
+	@Transactional
+	public void savePost(Post post) {
+		LOGGER.info("starting" );
+		postRepository.save(post);
+		LOGGER.debug("traveller details are" + post);
+		LOGGER.info("end" );
+	}
+	
 	
 }
