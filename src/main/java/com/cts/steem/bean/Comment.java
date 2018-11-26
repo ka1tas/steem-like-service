@@ -1,24 +1,64 @@
 package com.cts.steem.bean;
 
-public class Comment {
-	
-	private int id;
-	private String content;
-	private User user;
-	private Post post;
-	
-	public Comment(int id, String content, User user, Post post) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.user = user;
-		this.post = post;
-	}
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "comment")
+@NamedQueries({ @NamedQuery(name = "Comment.fetchAllCommentDetails", query = "from Comment"),
+	
+ @NamedQuery(name = "Comment.fetchCommentDetailById", query =
+ 
+		 " select DISTINCT c from Comment c" + " left join fetch c.user " +
+		  " left join fetch c.post " + " where c.id=:postId")
+		 
+
+})
+
+public class Comment {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Column(name = "co_id")
+	private int id;
+
+	@Column(name = "co_content")
+	private String content;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "co_us_id")
+	private User user;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "co_po_id")
+	@JsonIgnore
+	private Post post;
+
+	
+	@Transient
+	private int postid ;
+	
 	public Comment() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
+	
 
 	public int getId() {
 		return id;
@@ -52,12 +92,26 @@ public class Comment {
 		this.post = post;
 	}
 
+
+	
+	public int getPostid() {
+		
+		return postid;
+	}
+
+
+
+	public void setPostid(int postid) {
+		this.postid = postid;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", user=" + user + ", post=" + post + "]";
+		return "Comment [id=" + id + ", content=" + content + ", user=" + user + ", post=" + post + ", postid=" + postid
+				+ "]";
 	}
-	
-	
-	
+
+
 
 }

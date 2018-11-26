@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -34,13 +33,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	        query="select distinct u from User u " + 
 	        		"left join fetch u.friendList " + 
 	        		"where u.id = :userId"
-	 	)
+	 	),
 	/*@NamedQuery(
 	        name="User.fetchUserFriends",
 	        query="select distinct u from User u " + 
 	        		"left join fetch u.game " + 
 	        		"where u.id = :userId"
  	)*/
+	
+	
+	@NamedQuery(name = "User.fetchAllUserDetails", query = "select distinct u from User u"), 
+
+	@NamedQuery(name = "User.fetchUserById", query =" select DISTINCT u from User u" +  " where u.id=:userId")
+	
 })
 public class User {
 
@@ -114,6 +119,32 @@ public class User {
 	private List<String> friends;
 	
 	
+
+	public User(int id, String firstName, String lastName, String gender, int age, String country, String email,
+			String mobileno, String description, int steempoints, String userName, String password, List<Game> gameList,
+			List<User> friendList, List<String> friends) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.age = age;
+		this.country = country;
+		this.email = email;
+		this.mobileno = mobileno;
+		this.description = description;
+		this.steempoints = steempoints;
+		this.userName = userName;
+		this.password = password;
+		this.gameList = gameList;
+		this.friendList = friendList;
+		this.friends = friends;
+	}
+
+
+	
+	
+	
 	
 
 	public User() {
@@ -123,10 +154,13 @@ public class User {
 
 
 
+
+
+
+
 	public int getId() {
 		return id;
 	}
-
 
 
 	public void setId(int id) {
@@ -134,11 +168,9 @@ public class User {
 	}
 
 
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 
 	public void setFirstName(String firstName) {
@@ -195,11 +227,9 @@ public class User {
 	}
 
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 
 	public String getGender() {
@@ -207,17 +237,13 @@ public class User {
 	}
 
 
-
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-
-
 	public int getAge() {
 		return age;
 	}
-
 
 
 	public void setAge(int age) {
@@ -225,11 +251,9 @@ public class User {
 	}
 
 
-
 	public String getCountry() {
 		return country;
 	}
-
 
 
 	public void setCountry(String country) {
@@ -237,16 +261,63 @@ public class User {
 	}
 
 
-
 	public String getEmail() {
 		return email;
 	}
 
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+
+
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public int getSteempoints() {
+		return steempoints;
+	}
+
+
+	public void setSteempoints(int steempoints) {
+		this.steempoints = steempoints;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
 
 
 
@@ -256,57 +327,17 @@ public class User {
 
 
 
+
+
+
+
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
 
 
 
-	public String getDescription() {
-		return description;
-	}
 
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-
-	public int getSteempoints() {
-		return steempoints;
-	}
-
-
-
-	public void setSteempoints(int steempoints) {
-		this.steempoints = steempoints;
-	}
-
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 
 
@@ -315,12 +346,13 @@ public class User {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
 				+ ", age=" + age + ", country=" + country + ", email=" + email + ", mobileno=" + mobileno
 				+ ", description=" + description + ", steempoints=" + steempoints + ", userName=" + userName
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", gameList=" + gameList + ", friendList=" + friendList + ", friends="
+				+ friends + "]";
 	}
+
+
+
 	
-	
-	
-	
-	
+
 
 }
