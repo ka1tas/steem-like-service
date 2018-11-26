@@ -1,9 +1,10 @@
 package com.cts.steem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import com.cts.steem.bean.User;
 import com.cts.steem.repository.UserRepository;
@@ -22,6 +23,15 @@ public class UserService {
 	public User getUser(String userName) {
 
 		return (User) userRepository.findByUserName(userName);
+	}
+
+	public List<User> getUserDetails() {
+		return userRepository.fetchAllUserDetails();
+	}
+	
+	@Transactional
+	public User getUserById(int userId) {
+		return userRepository.fetchUserById(userId);
 
 	}
 	
@@ -31,4 +41,7 @@ public class UserService {
 	}
 
 
+
 }
+
+

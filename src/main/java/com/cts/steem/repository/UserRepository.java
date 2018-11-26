@@ -1,12 +1,22 @@
 package com.cts.steem.repository;
 
-import org.springframework.data.repository.CrudRepository;
+
 
 
 import com.cts.steem.bean.User;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import java.util.List;
 
-	User findByUserName(String userName);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+	List<User> fetchAllUserDetails();
+	User fetchUserById (@Param("userId") int userId);
 	User findById( int userId);
+	User findByUserName(String userName);
+	
 }
