@@ -43,11 +43,6 @@ public class ShowStoreView {
 	}
 
 
-	@Override
-	public String toString() {
-		return "ShowStoreView [user=" + user + ", game=" + game + "]";
-	}
-	
 	
 	
 	
