@@ -53,15 +53,6 @@ public class Post {
 
 
 
-	public Post(int id, String content, String title, User user, List<Comment> commentList) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.title = title;
-		this.user = user;
-		this.commentList = commentList;
-	}
-	
 	
 
 
@@ -124,9 +115,5 @@ public class Post {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Post [id=" + id + ", content=" + content + ", user=" + user + "]";
-	}
-
+	
 }

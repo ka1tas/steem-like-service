@@ -62,6 +62,7 @@ public class CommentRestController {
 		Comment commentById = commentService.getCommentDetailById(postId);
 		LOGGER.debug(commentById.toString());
 		return commentById;
+		
 	}
 	@PostMapping("/addcomment")
 	public ResponseEntity<Comment> insertComment(@RequestBody Comment comment) {
@@ -71,9 +72,7 @@ public class CommentRestController {
 		User user = userService.getUser(userid);
 		System.out.println(user);
 		comment.setUser(user);
-		
 		int postId=comment.getPostid();
-	
 		System.out.println("post id:" +postId);
 		comment.setPost(postService.getPostById(postId));
 		LOGGER.info("starting" );

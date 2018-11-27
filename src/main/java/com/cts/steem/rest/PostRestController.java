@@ -15,17 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.steem.SteemException;
-import com.cts.steem.bean.Comment;
 import com.cts.steem.bean.Post;
 import com.cts.steem.bean.User;
 import com.cts.steem.service.PostService;
 import com.cts.steem.service.UserService;
 
-
 @RestController
 @RequestMapping("/rest/post")
 public class PostRestController {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(PostRestController.class);
 
 	private PostService postService;
@@ -35,12 +33,11 @@ public class PostRestController {
 	public void setPostService(PostService postService) {
 		this.postService = postService;
 	}
-	
+
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
 
 	@GetMapping("/postlist")
 	public List<Post> getAllPosts() throws SteemException {
@@ -48,32 +45,29 @@ public class PostRestController {
 		LOGGER.debug(allPosts.toString());
 		return allPosts;
 	}
-	
+
 	@GetMapping("/show/{postId}")
 	public Post getPostById(@PathVariable int postId) throws SteemException {
 		Post allPosts = postService.getPostDetailById(postId);
 		LOGGER.debug(allPosts.toString());
 		return allPosts;
 	}
-	
-	
-	
+
 	@PostMapping("/addpost")
 	public ResponseEntity<Post> insertPost(@RequestBody Post post) {
 		System.out.println(post);
-		int userid=post.getUser().getId();
-		System.out.println("user Id" +userid);	
+		int userid = post.getUser().getId();
+		System.out.println("user Id" + userid);
 		User user = userService.getUser(userid);
 		System.out.println(user);
 		post.setUser(user);
 
-		LOGGER.info("starting" );
+		LOGGER.info("starting");
 		postService.savePost(post);
 		LOGGER.debug("post details are" + post);
-		LOGGER.info("end" );
+		LOGGER.info("end");
 		return new ResponseEntity<Post>(post, HttpStatus.OK);
-		
+
 	}
-	
 
 }
