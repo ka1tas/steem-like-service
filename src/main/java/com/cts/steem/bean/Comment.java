@@ -1,7 +1,5 @@
 package com.cts.steem.bean;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -92,6 +90,7 @@ public class Comment {
 		this.post = post;
 	}
 
+
 	
 	public int getPostid() {
 		
@@ -112,7 +111,5 @@ public class Comment {
 	}
 
 
-	
-	 
 
 }
